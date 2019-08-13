@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile PriceRequestor routes
+ *
+ * @category  Smile
+ * @package   Smile\PriceRequestor
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="smile_price_requestor" frontName="smile_price_requestor">
+            <module name="Smile_PriceRequestor" />
+        </route>
+    </router>
+</config>

@@ -13,9 +13,7 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
-use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\View\LayoutInterface as Layout;
 use Smile\Customer\Model\RequestFactory;
 use Smile\Customer\Model\RequestRepository;
@@ -27,13 +25,6 @@ use Smile\Customer\Model\RequestRepository;
  */
 class Post extends Action
 {
-    /**
-     * Product Repository
-     *
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
-
     /**
      * Request Factory
      *
@@ -59,19 +50,16 @@ class Post extends Action
      * Post constructor.
      *
      * @param Context                    $context
-     * @param ProductRepositoryInterface $productRepository
      * @param RequestFactory             $requestFactory
      * @param RequestRepository          $requestRepository
      * @param Layout                     $layout
      */
     public function __construct(
         Context                    $context,
-        ProductRepositoryInterface $productRepository,
         RequestFactory             $requestFactory,
         RequestRepository          $requestRepository,
         Layout                     $layout
     ) {
-        $this->productRepository = $productRepository;
         $this->requestFactory = $requestFactory;
         $this->requestRepository = $requestRepository;
         $this->layout = $layout;
@@ -81,55 +69,42 @@ class Post extends Action
     /**
      * Post action
      *
-     * @return \Magento\Framework\Controller\Result\Raw
+     * @return \Magento\Framework\Controller\Result\Raw | \Magento\Framework\Controller\Result\Redirect
      */
     public function execute()
     {
-        /** @var Template $message */
-        $message = $this->layout->createBlock(Template::class)
-                                ->setTemplate('Smile_Catalog::response_popup.phtml');
+        if ($this->getRequest()->isAjax()) {
+            /** @var Template $message */
+            $message = $this->layout->createBlock(Template::class)
+                                    ->setTemplate('Smile_Catalog::response_popup.phtml');
 
-        $postData = $this->getRequest()->getPostValue();
-        $message->setIsSuccess(false);
-        $message->setResponseText(__('Something went wrong. Your request has not been sent.'));
+            $postData = $this->getRequest()->getPostValue();
 
-        if (!empty($postData) && isset($postData['product_sku'])) {
-            $product = $this->getProductBySku($postData['product_sku']);
+            $message->setIsSuccess(false);
+            $message->setResponseText(__('Something went wrong. Your request has not been sent.'));
 
-            if ($product) {
+            if (!empty($postData) && isset($postData['product_sku'])) {
                 $priceRequest = $this->requestFactory->create();
                 $priceRequest->setData($postData);
 
                 try {
                     $this->requestRepository->save($priceRequest);
-                    $message->setResponseText(__('Your request for "%1" price has been sent', $product->getName()));
+                    $message->setResponseText(__('Your request for product price has been sent'));
                     $message->setIsSuccess(true);
                 } catch (CouldNotSaveException $e) {
                     $message->setResponseText(__('We can\'t send your price request right now.'));
                 }
             }
+
+            /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
+            $resultRaw = $this->resultFactory->create(ResultFactory::TYPE_RAW);
+
+            return $resultRaw->setContents($message->toHtml());
         }
 
-        /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
-        $resultRaw = $this->resultFactory->create(ResultFactory::TYPE_RAW);
-        return $resultRaw->setContents($message->toHtml());
-    }
+        /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
 
-    /**
-     * Get product by SKU
-     *
-     * @param $productSku
-     *
-     * @return bool|\Magento\Catalog\Api\Data\ProductInterface
-     */
-    public function getProductBySku($productSku)
-    {
-        try {
-            $product = $this->productRepository->get($productSku);
-        } catch (NoSuchEntityException $e) {
-            return false;
-        }
-
-        return $product;
+        return $resultRedirect->setPath($this->_redirect->getRefererUrl());
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Lebed Blog admin routes
+ * Smile Customer admin routes
  *
- * @category  Lebed
- * @package   Lebed\Blog
+ * @category  Smile
+ * @package   Smile\Customer
  * @author    Tetiana Lebed <teleb@smile.fr>
  * @copyright 2019 Smile
  */

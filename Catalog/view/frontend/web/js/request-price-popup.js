@@ -34,11 +34,10 @@ define([
 
         submitForm: function() {
             var self = this;
-            var data = $(this.options.formSelector).serialize() + '&product_sku=' + this.options.productSku;
             $.ajax({
                 url: this.options.urlAjax,
                 dataType: 'html',
-                data: data,
+                data: $(this.options.formSelector).serialize(),
                 type: 'POST',
                 loaderContext: self.options.formSelector,
                 showLoader: true,

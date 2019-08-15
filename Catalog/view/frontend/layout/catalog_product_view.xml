@@ -13,10 +13,11 @@
     <body>
         <referenceContainer name="product.info.price">
             <block name="price.requestor" class="Magento\Framework\View\Element\Template" template="Smile_Catalog::product/view/price_requestor.phtml" before="-">
-                <block name="request.form" as="request_form" class="Magento\Framework\View\Element\Template" template="Smile_Catalog::forms/request_form.phtml" />
-                <arguments>
-                    <argument name="current_product" xsi:type="helper" helper="Magento\Catalog\Helper\Data::getProduct"></argument>
-                </arguments>
+                <block name="request.form" as="request_form" class="Magento\Framework\View\Element\Template" template="Smile_Catalog::forms/request_form.phtml">
+                    <arguments>
+                        <argument name="current_product" xsi:type="helper" helper="Magento\Catalog\Helper\Data::getProduct"></argument>
+                    </arguments>
+                </block>
             </block>
         </referenceContainer>
         <referenceBlock name="product.price.final" remove="true" />

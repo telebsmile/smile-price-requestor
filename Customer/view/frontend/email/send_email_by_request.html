@@ -1,0 +1,24 @@
+<!--
+/**
+ * Smile Customer Send
+ *
+ * @category  Smile
+ * @package   Smile\Customer
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<!--@subject {{trans "Thank you for your request %userName" userName=$data.userName}} @-->
+<!--@vars {
+"var $data.productTitle":"Product Title",
+"var $data.productPrice":"Product Price"
+"var $data.answer":"Answer"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "You asked about price for %productTitle" productTitle=$data.productTitle}}</p>
+<p>{{trans "For now it cost: %productPrice" productPrice=$data.productPrice}}</p>
+<p>{{trans "answer: %answer" answer=$data.answer}}</p>
+
+{{template config_path="design/email/footer_template"}}

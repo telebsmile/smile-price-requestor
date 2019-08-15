@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile Customer module
+ *
+ * @category  Smile
+ * @package   Smile\Customer
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Smile_Customer" setup_version="0.0.1">
+        <sequence>
+            <module name="Magento_Customer" />
+        </sequence>
+    </module>
+</config>

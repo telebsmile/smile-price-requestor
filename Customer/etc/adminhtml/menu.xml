@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile Customer menu
+ *
+ * @category  Smile
+ * @package   Smile\Customer
+ * @author    Tetiana Lebed <lebed@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Smile_Customer::price_requests"
+             title="Price Requests"
+             module="Smile_Customer"
+             sortOrder="80"
+             parent="Magento_Customer::customer"
+             action="smile_price_requestor/request/index"
+             resource="Smile_Customer::price_requests" />
+    </menu>
+</config>

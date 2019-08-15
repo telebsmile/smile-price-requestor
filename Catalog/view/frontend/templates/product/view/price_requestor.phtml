@@ -1,0 +1,22 @@
+<?php
+/**
+ * Smile Catalog product view price requestor template
+ *
+ * @category  Smile
+ * @package   Smile\Catalog
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+
+/** @var Magento\Framework\View\Element\Template $block */
+/** @var Magento\Catalog\Model\Product $currentProduct */
+$currentProduct = $block->getCurrentProduct();
+$productSku = $currentProduct->getSku();
+?>
+<button class="button action primary" data-trigger="request_price"><?= __('Request Price') ?></button>
+<div data-mage-init='{"requestPricePopup" : {
+    "productSku" : "<?= $block->escapeHtml($productSku) ?>",
+     "urlAjax" : "<?= $block->escapeHtml($block->getUrl('smile_price_requestor/request/post')) ?>"
+}}' style="display: none">
+    <?= $this->getChildHtml('request_form') ?>
+</div>

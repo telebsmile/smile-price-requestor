@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile customer email templates
+ *
+ * @category  Smile
+ * @package   Smile\Customer
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="customer_send_price_by_request_email_template" label="Send Price By Request" file="send_email_by_request.html" type="html" module="Smile_Customer" area="frontend"/>
+</config>

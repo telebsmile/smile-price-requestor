@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile customer configuration
+ *
+ * @category  Smile
+ * @package   Smile\Customer
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <smile_customer>
+            <email_template>
+                <send_price_by_request>customer_send_price_by_request_email_template</send_price_by_request>
+            </email_template>
+            <sender_info>
+                <sender_email>Smile Admin</sender_email>
+                <sender_name>admin@addess.com</sender_name>
+            </sender_info>
+        </smile_customer>
+    </default>
+</config>

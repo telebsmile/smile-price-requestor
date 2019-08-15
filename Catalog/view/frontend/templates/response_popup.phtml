@@ -1,0 +1,15 @@
+<?php
+/**
+ * Smile Catalog response popup template
+ *
+ * @category  Smile
+ * @package   Smile\Catalog
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+
+/** @var Magento\Framework\View\Element\Template $block */
+?>
+<div class="message-popup popup-<?= $block->getIsSuccess() ? 'success' : 'error'?>">
+    <h3><?= $block->escapeHtml($block->getResponseText()) ?></h3>
+</div>

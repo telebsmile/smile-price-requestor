@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Smile Catalog catalog product view layout update
+ *
+ * @category  Smile
+ * @package   Smile\Catalog
+ * @author    Tetiana Lebed <teleb@smile.fr>
+ * @copyright 2019 Smile
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.price">
+            <block name="price.requestor" class="Magento\Framework\View\Element\Template" template="Smile_Catalog::product/view/price_requestor.phtml" before="-">
+                <block name="request.form" as="request_form" class="Magento\Framework\View\Element\Template" template="Smile_Catalog::forms/request_form.phtml" />
+                <arguments>
+                    <argument name="current_product" xsi:type="helper" helper="Magento\Catalog\Helper\Data::getProduct"></argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="product.price.final" remove="true" />
+    </body>
+</page>

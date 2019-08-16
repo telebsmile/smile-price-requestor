@@ -13,6 +13,7 @@ use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Smile\Customer\Model\Request;
 
 /**
  * Class RequestActions
@@ -25,6 +26,7 @@ class RequestActions extends Column
      * Url path
      */
     const URL_PATH_EDIT = 'smile_price_requestor/request/edit';
+    const URL_PATH_SEND = 'smile_price_requestor/request/send';
 
     /**
      * Url builder
@@ -79,7 +81,18 @@ class RequestActions extends Column
                                 ]
                             ),
                             'label' => __('Edit'),
-                        ],
+                        ]
+                    ];
+                }
+                if ($item['answer'] && $item['status'] != Request::STATUS_CLOSED) {
+                    $item[$this->getData('name')]['send'] = [
+                            'href'  => $this->urlBuilder->getUrl(
+                                static::URL_PATH_SEND,
+                                [
+                                    'id' => $item['id'],
+                                ]
+                            ),
+                            'label' => __('Send'),
                     ];
                 }
             }

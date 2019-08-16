@@ -16,8 +16,8 @@
                 <send_price_by_request>customer_send_price_by_request_email_template</send_price_by_request>
             </email_template>
             <sender_info>
-                <sender_email>Smile Admin</sender_email>
-                <sender_name>admin@addess.com</sender_name>
+                <sender_email>admin@addess.com</sender_email>
+                <sender_name>Smile Admin</sender_name>
             </sender_info>
         </smile_customer>
     </default>

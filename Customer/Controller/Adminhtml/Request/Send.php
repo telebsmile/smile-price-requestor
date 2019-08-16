@@ -120,6 +120,7 @@ class Send extends Action
         if ($answer) {
             try {
                 $customerEmail = $priceRequest->getEmail();
+                $customerName = $priceRequest->getName();
                 $adminEmail = $this->getAdminEmail();
                 $adminName = $this->getAdminName();
                 $product = $this->productRepository->get($priceRequest->getProductSku());
@@ -135,9 +136,9 @@ class Send extends Action
                     ->setTemplateOptions([
                         'area' => Area::AREA_FRONTEND,
                         'store' => Store::DEFAULT_STORE_ID
-                    ])->setTemplateVars([])
+                    ])->setTemplateVars($emailData)
                     ->setFrom(['name' => $adminName,'email' => $adminEmail])
-                    ->addTo($customerEmail)
+                    ->addTo($customerEmail, $customerName)
                     ->getTransport();
                 $transport->sendMessage();
 
